@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node ./test/test.js"
   },
-  "author": "",
+  "author": "Tobias",
   "license": "IMT",
   "type": "module"
 }
