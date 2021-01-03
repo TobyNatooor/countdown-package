@@ -4,29 +4,30 @@
  * @example 
  * timeUntil('2022-12-28T20:20:20')
  */
-export const timeUntil = (theDate: string) => {
 
-    interface TimeObj {
-        years: number,
-        weeks: number,
-        days: number,
-        hours: number,
-        minutes: number,
-        seconds: number,
-        miliseconds: number,
-        done: boolean
-    }
+interface Obj {
+    years: number,
+    weeks: number,
+    days: number,
+    hours: number,
+    minutes: number,
+    seconds: number,
+    miliseconds: number,
+    done: boolean
+}
+
+export const timeUntil = (theDate: string) => {
 
     let dateInMiliSecs: number
     let nowInMiliSecs: number
     let timeUntilInMiliSecs: number
-    let timeObj: TimeObj
+    let obj: Obj
 
     dateInMiliSecs = +new Date(theDate)
     nowInMiliSecs = +new Date()
     timeUntilInMiliSecs = dateInMiliSecs - nowInMiliSecs
 
-    timeObj = {
+    obj = {
         'years': + Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
         'weeks': + Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 7),
         'days': + Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) % 365),
@@ -37,8 +38,8 @@ export const timeUntil = (theDate: string) => {
         'done': false
     }
 
-    timeObj.miliseconds < 0 ? timeObj.done = true : timeObj.done = false
+    obj.miliseconds < 0 ? obj.done = true : obj.done = false
 
-    return timeObj
+    return obj
 }
 

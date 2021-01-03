@@ -8,11 +8,11 @@ export var timeUntil = function (theDate) {
     var dateInMiliSecs;
     var nowInMiliSecs;
     var timeUntilInMiliSecs;
-    var timeObj;
+    var obj;
     dateInMiliSecs = +new Date(theDate);
     nowInMiliSecs = +new Date();
     timeUntilInMiliSecs = dateInMiliSecs - nowInMiliSecs;
-    timeObj = {
+    obj = {
         'years': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
         'weeks': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 7),
         'days': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) % 365),
@@ -22,6 +22,6 @@ export var timeUntil = function (theDate) {
         'miliseconds': +Math.floor(timeUntilInMiliSecs % 1000),
         'done': false
     };
-    timeObj.miliseconds < 0 ? timeObj.done = true : timeObj.done = false;
-    return timeObj;
+    obj.miliseconds < 0 ? obj.done = true : obj.done = false;
+    return obj;
 };
