@@ -1,5 +1,10 @@
-
-export const timeUntil = (countdownDate: string) => {
+/**
+ * returns how much time there is until a specified date
+ * @param theDate
+ * @example 
+ * timeUntil('2022-12-28T20:20:20')
+ */
+export const timeUntil = (theDate: string) => {
 
     interface TimeObj {
         years: number,
@@ -17,7 +22,7 @@ export const timeUntil = (countdownDate: string) => {
     let timeUntilInMiliSecs: number
     let timeObj: TimeObj
 
-    dateInMiliSecs = +new Date(countdownDate)
+    dateInMiliSecs = +new Date(theDate)
     nowInMiliSecs = +new Date()
     timeUntilInMiliSecs = dateInMiliSecs - nowInMiliSecs
 

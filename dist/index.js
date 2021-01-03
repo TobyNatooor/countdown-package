@@ -1,9 +1,15 @@
-export var timeUntil = function (countdownDate) {
+/**
+ * returns how much time there is until a specified date
+ * @param theDate
+ * @example
+ * timeUntil('2022-12-28T20:20:20')
+ */
+export var timeUntil = function (theDate) {
     var dateInMiliSecs;
     var nowInMiliSecs;
     var timeUntilInMiliSecs;
     var timeObj;
-    dateInMiliSecs = +new Date(countdownDate);
+    dateInMiliSecs = +new Date(theDate);
     nowInMiliSecs = +new Date();
     timeUntilInMiliSecs = dateInMiliSecs - nowInMiliSecs;
     timeObj = {

@@ -1,12 +1,16 @@
 {
-  "name": "@tobynatooor/countdown",
-  "version": "1.1.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "node ./test/test.js"
-  },
-  "author": "Tobias",
-  "license": "IMT",
-  "type": "module"
+    "name": "@tobynatooor/countdown",
+    "version": "1.2.1",
+    "description": "An easy way to count down to a specified date",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "dist/index.js",
+        "test": "node ./test/test.js"
+    },
+    "author": "Tobias",
+    "license": "IMT",
+    "type": "module",
+    "keywords": [
+        "countdown"
+    ]
 }
