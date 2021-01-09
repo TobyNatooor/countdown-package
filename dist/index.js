@@ -9,19 +9,30 @@ export var timeUntil = function (theDate) {
     var nowInMiliSecs;
     var timeUntilInMiliSecs;
     var obj;
+    var daysTillWeekOne;
     dateInMiliSecs = +new Date(theDate);
     nowInMiliSecs = +new Date();
     timeUntilInMiliSecs = dateInMiliSecs - nowInMiliSecs;
-    obj = {
-        'years': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
-        'weeks': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 7),
-        'days': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) % 365),
-        'hours': +Math.floor((timeUntilInMiliSecs / 1000 / 60 / 60) % 24),
-        'minutes': +Math.floor((timeUntilInMiliSecs / 1000 / 60) % 60),
-        'seconds': +Math.floor((timeUntilInMiliSecs / 1000) % 60),
-        'miliseconds': +Math.floor(timeUntilInMiliSecs % 1000),
-        'done': false
+    daysTillWeekOne = +new Date(theDate).getFullYear() - 1960;
+    daysTillWeekOne += Math.floor(daysTillWeekOne / 4);
+    daysTillWeekOne = (daysTillWeekOne + 5) % 7;
+    daysTillWeekOne = 7 - daysTillWeekOne;
+    var makeObj = function (floorOrCeil, rmDays) {
+        obj = {
+            'years': +floorOrCeil((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
+            'weeks': +floorOrCeil(((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) + rmDays) / 7),
+            'days': +floorOrCeil(timeUntilInMiliSecs / 1000 / 60 / 60 / 24),
+            'hours': +floorOrCeil(timeUntilInMiliSecs / 1000 / 60 / 60),
+            'minutes': +floorOrCeil(timeUntilInMiliSecs / 1000 / 60),
+            'seconds': +floorOrCeil(timeUntilInMiliSecs / 1000),
+            'miliseconds': +floorOrCeil(timeUntilInMiliSecs),
+            'done': false
+        };
+        obj.miliseconds < 0 ? obj.done = true : obj.done = false;
+        return obj;
     };
-    obj.miliseconds < 0 ? obj.done = true : obj.done = false;
-    return obj;
+    if (timeUntilInMiliSecs > 0)
+        return makeObj(Math.floor, -daysTillWeekOne);
+    if (timeUntilInMiliSecs < 0)
+        return makeObj(Math.ceil, daysTillWeekOne);
 };

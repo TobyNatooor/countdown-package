@@ -14,5 +14,5 @@ interface Obj {
     miliseconds: number;
     done: boolean;
 }
-export declare const timeUntil: (theDate: string) => Obj;
+export declare const timeUntil: (theDate: string) => Obj | undefined;
 export {};
