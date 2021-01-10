@@ -8,7 +8,7 @@ export var timeUntil = function (theDate) {
     var dateInMiliSecs;
     var nowInMiliSecs;
     var timeUntilInMiliSecs;
-    var obj;
+    var timeLeft;
     var daysTillWeekOne;
     dateInMiliSecs = +new Date(theDate);
     nowInMiliSecs = +new Date();
@@ -18,7 +18,7 @@ export var timeUntil = function (theDate) {
     daysTillWeekOne = (daysTillWeekOne + 5) % 7;
     daysTillWeekOne = 7 - daysTillWeekOne;
     var makeObj = function (floorOrCeil, rmDays) {
-        obj = {
+        timeLeft = {
             'years': +floorOrCeil((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
             'weeks': +floorOrCeil(((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) + rmDays) / 7),
             'days': +floorOrCeil(timeUntilInMiliSecs / 1000 / 60 / 60 / 24),
@@ -28,11 +28,13 @@ export var timeUntil = function (theDate) {
             'miliseconds': +floorOrCeil(timeUntilInMiliSecs),
             'done': false
         };
-        obj.miliseconds < 0 ? obj.done = true : obj.done = false;
-        return obj;
+        timeLeft.miliseconds < 0 ? timeLeft.done = true : timeLeft.done = false;
+        return timeLeft;
     };
-    if (timeUntilInMiliSecs > 0)
+    if (timeUntilInMiliSecs > 0) {
         return makeObj(Math.floor, -daysTillWeekOne);
-    if (timeUntilInMiliSecs < 0)
+    }
+    else {
         return makeObj(Math.ceil, daysTillWeekOne);
+    }
 };
