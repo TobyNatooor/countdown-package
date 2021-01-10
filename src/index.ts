@@ -1,11 +1,5 @@
-/**
- * returns how much time there is until a specified date
- * @param theDate
- * @example 
- * timeUntil('2022-12-28T20:20:20')
- */
 
-interface Obj {
+interface TimeLeft {
     years: number,
     weeks: number,
     days: number,
@@ -16,12 +10,18 @@ interface Obj {
     done: boolean
 }
 
-export const timeUntil = (theDate: string) => {
+/**
+ * returns how much time there is until a specified date
+ * @param theDate
+ * @example 
+ * timeUntil('2022-12-28T20:20:20')
+ */
+export const timeUntil = (theDate: string): TimeLeft => {
 
     let dateInMiliSecs: number
     let nowInMiliSecs: number
     let timeUntilInMiliSecs: number
-    let obj: Obj
+    let timeLeft: TimeLeft
     let daysTillWeekOne: number
 
     dateInMiliSecs = +new Date(theDate)
@@ -34,7 +34,7 @@ export const timeUntil = (theDate: string) => {
     daysTillWeekOne = 7 - daysTillWeekOne
 
     const makeObj = (floorOrCeil: any, rmDays: number) => {
-        obj = {
+        timeLeft = {
             'years': + floorOrCeil((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) / 365),
             'weeks': + floorOrCeil(((timeUntilInMiliSecs / 1000 / 60 / 60 / 24) + rmDays) / 7),
             'days': + floorOrCeil(timeUntilInMiliSecs / 1000 / 60 / 60 / 24),
@@ -44,11 +44,15 @@ export const timeUntil = (theDate: string) => {
             'miliseconds': + floorOrCeil(timeUntilInMiliSecs),
             'done': false
         }
-        obj.miliseconds < 0 ? obj.done = true : obj.done = false
-        return obj
+        timeLeft.miliseconds < 0 ? timeLeft.done = true : timeLeft.done = false
+        return timeLeft
     }
 
-    if (timeUntilInMiliSecs > 0) return makeObj(Math.floor, -daysTillWeekOne)
-    if (timeUntilInMiliSecs < 0) return makeObj(Math.ceil, daysTillWeekOne)
+    if (timeUntilInMiliSecs > 0) {
+        return makeObj(Math.floor, -daysTillWeekOne)
+    } else {
+        return makeObj(Math.ceil, daysTillWeekOne)
+    }
+
 }
 

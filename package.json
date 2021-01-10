@@ -1,8 +1,12 @@
 {
     "name": "@tobynatooor/countdown",
-    "version": "1.2.3",
-    "description": "An easy way to count down to a specified date",
+    "version": "1.2.4",
+    "description": "An easy way to count down to a specified date or simply get the time until a specified date",
     "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TobyNatooor/countdown-package"
+    },
     "scripts": {
         "start": "dist/index.js",
         "test": "node ./test/test.js"
